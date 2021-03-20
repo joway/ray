@@ -1,27 +1,26 @@
-package protocol
+package ray
 
 import (
 	"context"
-	"github/joway/ray"
 	"net/http"
 )
 
 var _ Protocol = (*HttpProtocol)(nil)
 
 type HttpProtocol struct {
-	trans ray.Transport
+	trans Transport
 }
 
 func (p *HttpProtocol) OnConnect() {}
 
-func (p *HttpProtocol) Read(ctx context.Context) (ray.Packet, error) {
+func (p *HttpProtocol) Read(ctx context.Context) (Packet, error) {
 	return http.ReadRequest(p.trans.Reader())
 }
 
-func (p *HttpProtocol) Write(ctx context.Context, packet ray.Packet) error {
+func (p *HttpProtocol) Write(ctx context.Context, packet Packet) error {
 	resp, ok := packet.(*http.Response)
 	if !ok {
-		return ray.ErrInvalidPacket
+		return ErrInvalidPacket
 	}
 	return resp.Write(p.trans)
 }

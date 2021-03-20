@@ -1,4 +1,4 @@
-module github/joway/ray
+module github.com/joway/ray
 
 go 1.15
 

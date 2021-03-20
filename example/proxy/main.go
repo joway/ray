@@ -3,14 +3,13 @@ package main
 import (
 	"context"
 	"errors"
-	"github/joway/ray"
-	"github/joway/ray/protocol"
+	"github.com/joway/ray"
 	"log"
 	"net"
 )
 
 var (
-	_ protocol.Protocol   = (*TCPProtocol)(nil)
+	_ ray.Protocol        = (*TCPProtocol)(nil)
 	_ ray.ServerProcessor = (*TCPProxyProcessor)(nil)
 )
 
@@ -21,7 +20,7 @@ type TCPProtocol struct {
 
 type TCPPacket []byte
 
-func NewTCPProtocol(trans ray.Transport) protocol.Protocol {
+func NewTCPProtocol(trans ray.Transport) ray.Protocol {
 	return &TCPProtocol{
 		trans: trans,
 		rbuf:  make([]byte, 100),

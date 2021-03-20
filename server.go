@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github/joway/ray/protocol"
 	"io"
 	"net"
 )
@@ -22,7 +21,7 @@ type Server struct {
 	port int
 
 	transFactory TransportFactory
-	protoFactory protocol.ProtocolFactory
+	protoFactory ProtocolFactory
 	processor    ServerProcessor
 
 	logger Logger
@@ -39,7 +38,7 @@ func defaultServer() *Server {
 }
 
 func NewServer(
-	transportFactory TransportFactory, protocolFactory protocol.ProtocolFactory,
+	transportFactory TransportFactory, protocolFactory ProtocolFactory,
 	processor ServerProcessor,
 	options ...ServerOption,
 ) *Server {

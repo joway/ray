@@ -3,8 +3,7 @@ package main
 import (
 	"context"
 	"errors"
-	"github/joway/ray"
-	"github/joway/ray/protocol"
+	"github.com/joway/ray"
 	"log"
 )
 
@@ -25,7 +24,7 @@ func (p *EchoProcessor) Process(ctx context.Context, request ray.Packet) (ray.Pa
 func main() {
 	var (
 		transFactory = ray.NewTransport
-		protoFactory = protocol.NewEchoProtocol
+		protoFactory = ray.NewEchoProtocol
 		processor    = &EchoProcessor{}
 	)
 	server := ray.NewServer(transFactory, protoFactory, processor)
